@@ -1,0 +1,48 @@
+name: Build and upload a release
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: Reaction.slnx
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+
+    # build the solution
+    - name: Build solution
+      run: |
+        dotnet build -c Release Reaction/Reaction.csproj
+      
+    - name: Compile the Inno Setup script
+      uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+      with:
+        path: Installer/setup.iss
+
+    - name: Zip installer
+      run: |
+        Get-ChildItem -Path Installer/reaction-setup-*.exe | ForEach-Object { Compress-Archive -Path $_.FullName -DestinationPath "$($_.BaseName).zip" }
+        
+    - name: Upload release assets
+      uses: softprops/action-gh-release@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        files: reaction-setup-*.zip
