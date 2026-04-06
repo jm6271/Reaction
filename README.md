@@ -17,6 +17,10 @@ The test follows a simple sequence:
 
 The delay before the green signal is randomized so that the moment of the signal cannot be predicted.
 
+## Screenshots
+
+![Reaction screencapture](Screenshots/reaction.gif)
+
 ## Typical Reaction Times
 
 Human reaction times vary depending on the type of stimulus and the individual.
