@@ -1,0 +1,36 @@
+﻿<Window
+    x:Class="Reaction.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Reaction"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Reaction"
+    Width="800"
+    Height="450"
+    d:DataContext="{d:DesignInstance Type=local:MainWindow}"
+    mc:Ignorable="d">
+    <Grid>
+        <Border
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="{Binding BackgroundColor}"
+            MouseDown="Border_MouseDown">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="28"
+                    FontWeight="SemiBold"
+                    Text="{Binding TitleText}" />
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="20"
+                    Text="{Binding BodyLine1}" />
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="20"
+                    Text="{Binding BodyLine2}" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
