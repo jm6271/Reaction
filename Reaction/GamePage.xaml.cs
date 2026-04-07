@@ -3,17 +3,17 @@ using System.Windows.Input;
 
 namespace Reaction
 {
-    public partial class MainPage : Page
+    public partial class GamePage : Page
     {
-        public MainPage()
+        public GamePage()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new GameViewModel();
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ((MainViewModel)DataContext).HandleInputCommand.Execute(null);
+            ((GameViewModel)DataContext).HandleInputCommand.Execute(null);
         }
     }
 }

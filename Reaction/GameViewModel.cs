@@ -1,20 +1,11 @@
-using System.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Reaction
 {
-    public class RelayCommand(Action execute) : ICommand
-    {
-        public event EventHandler? CanExecuteChanged;
-        public bool CanExecute(object? parameter) => true;
-        public void Execute(object? parameter) => execute();
-    }
-
-    public class MainViewModel : INotifyPropertyChanged
+    public partial class GameViewModel : ObservableObject
     {
         private static readonly SolidColorBrush NormalBackgroundBrush =
             new(Color.FromArgb(0xFF, 0x2B, 0x87, 0xD1));
@@ -26,11 +17,6 @@ namespace Reaction
         private readonly Random _random = new();
         private readonly Stopwatch _sw = new();
 
-        private Brush _backgroundColor;
-        private string _titleText;
-        private string _bodyLine1;
-        private string _bodyLine2;
-
         private enum AppState
         {
             PrePlay,
@@ -41,64 +27,19 @@ namespace Reaction
 
         private AppState _state = AppState.PrePlay;
 
-        public MainViewModel()
-        {
-            _backgroundColor = NormalBackgroundBrush;
-            _titleText = "Reaction Time Test";
-            _bodyLine1 = "When the background turns green, click as quickly as you can!";
-            _bodyLine2 = "Click to start.";
-            HandleInputCommand = new RelayCommand(HandleInput);
-        }
+        [ObservableProperty]
+        private Brush _backgroundColor = NormalBackgroundBrush;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        [ObservableProperty]
+        private string _titleText = "Reaction Time Test";
 
-        protected void OnPropertyChanged([CallerMemberName] string? name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        [ObservableProperty]
+        private string _bodyLine1 = "When the background turns green, click as quickly as you can!";
 
-        public Brush BackgroundColor
-        {
-            get => _backgroundColor;
-            set
-            {
-                _backgroundColor = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        private string _bodyLine2 = "Click to start.";
 
-        public string TitleText
-        {
-            get => _titleText;
-            set
-            {
-                _titleText = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string BodyLine1
-        {
-            get => _bodyLine1;
-            set
-            {
-                _bodyLine1 = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string BodyLine2
-        {
-            get => _bodyLine2;
-            set
-            {
-                _bodyLine2 = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ICommand HandleInputCommand { get; }
-
+        [RelayCommand]
         private void HandleInput()
         {
             switch (_state)

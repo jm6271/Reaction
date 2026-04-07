@@ -7,7 +7,7 @@ namespace Reaction
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new MainPage());
+            MainFrame.Navigate(new GamePage());
         }
     }
 }
