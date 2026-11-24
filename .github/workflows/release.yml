@@ -39,10 +39,18 @@ jobs:
     - name: Zip installer
       run: |
         Get-ChildItem -Path Installer/reaction-setup-*.exe | ForEach-Object { Compress-Archive -Path $_.FullName -DestinationPath "$($_.BaseName).zip" }
-        
+
+    - name: Publish standalone executable
+      run: |
+        dotnet publish Reaction/Reaction.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -p:DebugType=None --output artifacts/standalone
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
     - name: Upload release assets
       uses: softprops/action-gh-release@v2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        files: reaction-setup-*.zip
+        fail_on_unmatched_files: true
+        files: |
+          reaction-setup-*.zip
+          artifacts/standalone/Reaction.exe

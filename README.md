@@ -55,7 +55,14 @@ Even with a native application, several factors limit the precision of any softw
 
 Because of these limits, the result should be viewed as an **approximate measurement**, but it is still useful for comparing performance between trials.
 
-## Installing
+## Running the app
+
+### Running without installing
+
+1. Download `Reaction.exe` from the latest release on the **GitHub Releases** page.
+2. Double-click the downloaded file to start the application.
+
+### Installing
 
 1. Download the latest installer from the **GitHub Releases** page.
 2. Run the installer.
