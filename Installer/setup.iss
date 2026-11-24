@@ -3,7 +3,7 @@
 ; Non-commercial use only
 
 #define MyAppName "Reaction"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.1"
 #define MyAppPublisher "jm6271"
 #define MyAppURL "https://github.com/jm6271/Reaction"
 #define MyAppExeName "Reaction.exe"
@@ -34,7 +34,7 @@ LicenseFile=..\LICENSE.txt
 ; Remove the following line to run in administrative install mode (install for all users).
 PrivilegesRequired=lowest
 OutputDir=.
-OutputBaseFilename=reaction-setup-v1.0.0
+OutputBaseFilename=reaction-setup-v1.0.1
 SolidCompression=yes
 WizardStyle=modern dynamic windows11
 
